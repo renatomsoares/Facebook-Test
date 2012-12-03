@@ -400,10 +400,10 @@ public class UI extends javax.swing.JFrame {
 			data[i][2] = link;
     		
     	}*/
-    	//URL a = new URL("logoTipo1.jpg");
+    	URL a = new URL("logoTipo1.jpg");
     	ImageIcon s = new ImageIcon("logoTipo1.jpg");
     	Object[][] data = {
-    			{a,"oi","oi"}
+    			{s.getImage(),"oi","oi"}
     	};
     	model = new DefaultTableModel(data, nomeColunas );
     	table1 = new JTable(model){
