@@ -40,9 +40,9 @@ public class FacebookAccess implements IFacebookAccess {
 	}
 	
 	// Método que executa uma query com parametros. Retorna uma lista de usuarios.
-	public List<Usuario> getQueryResult(String field, String param) {
+	public List<Usuario> getQueryResult(String filter) {
 		String ids = implodeArray(friendsIds, ",");
-		String query = "SELECT name, relationship_status, pic, sex, profile_url FROM user WHERE uid IN (" + ids + ") and " + field + " = '" + param + "'";
+		String query = "SELECT name, relationship_status, pic, sex, profile_url FROM user WHERE uid IN (" + ids + ") and " + filter;
 		return facebookClient.executeQuery(query, Usuario.class);
 	}
 	

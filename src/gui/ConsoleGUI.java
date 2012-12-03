@@ -158,7 +158,7 @@ public class ConsoleGUI implements IGUI {
 
 	@Override
 	public void imprimirCasados() {
-		amigos = acesso.getQueryResult("relationship_status", "married");
+		amigos = acesso.getQueryResult("relationship_status");
 		for (int i = 0; i < amigos.size(); i++) {
 			System.out.println(
 					amigos.get(i).getName() + " is " + amigos.get(i).getRelationship_status()

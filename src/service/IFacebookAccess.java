@@ -15,5 +15,5 @@ public interface IFacebookAccess {
 	public List<Usuario> getFriendsQuery();
 	public void init(String token);
 	public ArrayList<String> getFriendsIds();
-	public List<Usuario> getQueryResult(String field, String value);
+	public List<Usuario> getQueryResult(String filter);
 }

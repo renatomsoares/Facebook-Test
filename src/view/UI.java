@@ -7,6 +7,7 @@ import graph.Graph;
 import graph.Usuario;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -67,8 +68,8 @@ public class UI extends javax.swing.JFrame {
         voltar1 = new javax.swing.JButton();
         painelOp1 = new javax.swing.JPanel();
         labelDescOp1 = new javax.swing.JLabel();
-        checkSexo = new javax.swing.JCheckBox();
-        checkIdade = new javax.swing.JCheckBox();
+      //  checkSexo = new javax.swing.JCheckBox();
+        //checkIdade = new javax.swing.JCheckBox();
         checkMasc = new javax.swing.JCheckBox();
         checkFem = new javax.swing.JCheckBox();
         buttonExec = new javax.swing.JButton();
@@ -189,9 +190,9 @@ public class UI extends javax.swing.JFrame {
 
         labelDescOp1.setText("Escolha entre os filtros abaixo");
 
-        checkSexo.setText("Sexo");
+        //checkSexo.setText("Sexo");
 
-        checkIdade.setText("Idade");
+        //checkIdade.setText("Idade");
 
         checkMasc.setText("Masculino");
 
@@ -223,12 +224,10 @@ public class UI extends javax.swing.JFrame {
             .addGroup(painelOp1Layout.createSequentialGroup()
                 .addGap(74, 74, 74)
                 .addGroup(painelOp1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(checkIdade)
                     .addComponent(labelDescOp1)
                     .addGroup(painelOp1Layout.createSequentialGroup()
                         .addGroup(painelOp1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(painelOp1Layout.createSequentialGroup()
-                                .addComponent(checkSexo)
                                 .addGap(18, 18, 18)
                                 .addComponent(checkMasc))
                             .addComponent(buttonExec))
@@ -245,20 +244,15 @@ public class UI extends javax.swing.JFrame {
                 .addComponent(labelDescOp1)
                 .addGap(33, 33, 33)
                 .addGroup(painelOp1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(checkSexo)
                     .addComponent(checkMasc)
                     .addComponent(checkFem))
                 .addGap(18, 18, 18)
-                .addComponent(checkIdade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(painelOp1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonExec)
                     .addComponent(voltar2))
                 .addGap(61, 61, 61))
         );
-
-        //table1.setModel(model);
-        //jScrollPane2.setViewportView(table1);
 
         voltar3.setText("Voltar");
         voltar3.addActionListener(new java.awt.event.ActionListener() {
@@ -298,6 +292,7 @@ public class UI extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 500));
 
         javax.swing.GroupLayout painelPrincipalLayout = new javax.swing.GroupLayout(painelPrincipal);
         painelPrincipal.setLayout(painelPrincipalLayout);
@@ -371,9 +366,10 @@ public class UI extends javax.swing.JFrame {
 
     private void buttonExecActionPerformed(java.awt.event.ActionEvent evt) throws MalformedURLException {
     	if (checkMasc.isSelected()){
-    		query = acesso.getQueryResult("sex", "male");
+    		query = acesso.getQueryResult("sex = 'male' and relationship_status = 'single'");
+    		System.out.println(query.size());
     	} else if (checkFem.isSelected()) {
-    		query = acesso.getQueryResult("sex", "female");
+    		query = acesso.getQueryResult("sex = 'female' and relationship_status = 'single'");
     	}
     	createTable(query);
         cards.show(painelPrincipal, "op2");
@@ -389,28 +385,29 @@ public class UI extends javax.swing.JFrame {
 
     private void createTable(List<Usuario> query) throws MalformedURLException {
     	String[] nomeColunas = {"Foto", "Nome", "Link" };
-    	//Object[][] data = new Object[query.size()][3];
-    	/*for (int i=0;i<query.size();i++) {
-    		URL url = new URL(query.get(i).getPic());
-    		ImageIcon foto = new ImageIcon(url);
-    		String nome = query.get(i).getName();
-    		String link = query.get(i).getLink();
+    	Object[][] data = new Object[query.size()][3];
+    	URL url;
+    	ImageIcon foto;
+    	String nome, link;
+    	for (int i=0;i<query.size();i++) {
+    		url = new URL(query.get(i).getPic());
+    		foto = new ImageIcon(url);
+    		nome = query.get(i).getName();
+    		link = query.get(i).getLink();
     		data[i][0] = foto;
 			data[i][1] = nome;
 			data[i][2] = link;
     		
-    	}*/
-    	URL a = new URL("logoTipo1.jpg");
-    	ImageIcon s = new ImageIcon("logoTipo1.jpg");
-    	Object[][] data = {
-    			{s.getImage(),"oi","oi"}
+    	}
+
+    	DefaultTableModel model = new DefaultTableModel(data,nomeColunas);
+    	table1= new JTable(model) { 
+    	public Class getColumnClass(int column) {
+    	return getValueAt(0, column).getClass();
+    	}
     	};
-    	model = new DefaultTableModel(data, nomeColunas );
-    	table1 = new JTable(model){
-    		public Class getColumn(int column) {
-    			return getValueAt(0, column).getClass();
-    		}
-    	};
+    	table1.setRowHeight(90);
+    	//table1.setPreferredSize(new Dimension(500, 300));
     	jScrollPane2.setViewportView(table1);
     }
     
@@ -457,8 +454,8 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JButton buttonExec;
     private javax.swing.JButton buttonFlirtingFiltros;
     private javax.swing.JButton buttonMeusFiltros;
-    private javax.swing.JCheckBox checkIdade;
-    private javax.swing.JCheckBox checkSexo;
+    //private javax.swing.JCheckBox checkIdade;
+    //private javax.swing.JCheckBox checkSexo;
     private javax.swing.JTextField fieldToken;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelBemVindo;
