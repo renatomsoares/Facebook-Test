@@ -4,5 +4,5 @@
 
 <h2>Instruções de uso</h2>
 
-<p>Para usar o Get Flirting no eclipse, é necessário ter a biblioteca da API RestFB instalada na build path do projeto. Você pode baixar a biblioteca <a href="https://github.com/downloads/revetkn/restfb/restfb-1.6.11.zip">aqui</a>.</p> 
+<p>Para usar o Get Flirting no eclipse, é necessário ter a biblioteca da API RestFB instalada na build path do projeto. Você pode baixar a biblioteca <a href="https://github.com/downloads/revetkn/restfb/restfb-1.6.11.zip">aqui</a> (note que a biblioteca também se encontra no diretório 'library' deste projeto, porém é necessário adiciona-la ao build path do projeto).</p> 
 <p>Você também precisará de uma API Token, para que o Facebook possa disponibilizar os seus dados no Get Flirting. Para isto, você pode utilizar a <a href="https://developers.facebook.com/tools/explorer">Graph API Explorer</a> toolkit, para gerar uma token a partir da sua conta na rede social.</p>
